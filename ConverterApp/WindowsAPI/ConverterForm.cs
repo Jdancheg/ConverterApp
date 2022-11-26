@@ -15,15 +15,17 @@ namespace WindowsAPI
         private void ConverterFormLoad(object sender, EventArgs e)
         {
             listBox1.Items.AddRange(_manager.GetPhysicValuesList().ToArray());
-            listBox1.SelectedIndex = 0;
-            listBox2.SelectedIndex = 0;
-            listBox3.SelectedIndex = 0;
+            listBox1.SelectedIndex = 0;          
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            listBox2.Items.Clear();
+            listBox3.Items.Clear();
             listBox2.Items.AddRange(_manager.GetMeasureList(listBox1.SelectedItem.ToString()).ToArray());
             listBox3.Items.AddRange(_manager.GetMeasureList(listBox1.SelectedItem.ToString()).ToArray());
+            listBox2.SelectedIndex = 0;
+            listBox3.SelectedIndex = 0;
         }
 
         private void BtnConvert_Click(object sender, EventArgs e)

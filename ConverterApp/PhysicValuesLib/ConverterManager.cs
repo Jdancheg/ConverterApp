@@ -40,11 +40,7 @@ public class ConverterManager
             if (value.GetValueName() == valueName)
             {
                 _myValue = value;
-            }
-            else
-            {
-                throw new Exception("Ошибка! В библиотеке нет такой величины");
-            }
+            }            
         }
     }
 

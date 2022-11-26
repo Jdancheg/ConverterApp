@@ -6,15 +6,7 @@ public class Time : IValue
     private string? From { get; set; }
     private string? To { get; set; }
 
-    private string _valueName = "Время";
-
-    private List<string> _measureList = new List<string>()
-    {
-        "Секунды",
-        "Минуты",
-        "Часы",
-        "Милисекунды"
-    };
+    private string _valueName = "Время";    
 
     /// <summary>
     /// Метод возвращает конвертированное значение
@@ -25,7 +17,6 @@ public class Time : IValue
         Value = value;
         From = from;
         To = to;
-
         ToSi();
         ToRequired();
         return Value;
@@ -37,7 +28,12 @@ public class Time : IValue
     /// <returns></returns>
     public List<string> GetMeasureList()
     {
-        return _measureList;
+        List<string> list = new List<string>();
+        foreach (var str in _coeff)
+        {
+            list.Add(str.Key);
+        }
+        return list;
     }
 
     /// <summary>
@@ -45,20 +41,7 @@ public class Time : IValue
     /// </summary>
     public void ToRequired()
     {
-        switch (To)
-        {
-            case "Секунды":
-                break;
-            case "Минуты":
-                Value /= 60;
-                break;
-            case "Часы":
-                Value /= 3600;
-                break;
-            case "Милисекунды":
-                Value *= 1000;
-                break;
-        }
+        Value /= _coeff[To];
     }
 
     /// <summary>
@@ -66,20 +49,7 @@ public class Time : IValue
     /// </summary>
     public void ToSi()
     {
-        switch(From)
-        {
-            case "Секунды":
-                break;
-            case "Минуты":
-                Value *= 60;
-                break;
-            case "Часы":
-                Value *= 3600;
-                break;
-            case "Милисекунды":
-                Value /= 1000;
-                break;
-        }
+        Value *= _coeff[From];
     }
 
     public string GetValueName()
@@ -87,8 +57,11 @@ public class Time : IValue
         return _valueName;
     }
 
-    public Dictionary<string, double> ConvertationCoefficient()
+    private Dictionary<string, double> _coeff = new Dictionary<string, double>()
     {
-        throw new NotImplementedException();
-    }
+        { "Секунды",        1       },
+        { "Милисекунды",    0.001   },
+        { "Минуты",         60      },
+        { "Часы",           60 * 60 },
+    };   
 }
