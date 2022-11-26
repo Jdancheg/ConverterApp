@@ -5,6 +5,12 @@
 /// </summary>
 public interface IValue
 {
+    /// <summary>
+    /// Словарь коэффициентов перевода величин
+    /// </summary>
+    /// <returns></returns>
+    Dictionary<string, double> ConvertationCoefficient();
+
     string GetValueName();
     /// <summary>
     /// Метод возвращает список единиц измерения

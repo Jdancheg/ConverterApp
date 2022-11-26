@@ -1,6 +1,6 @@
 ﻿namespace WindowsAPI
 {
-    partial class Form1
+    partial class ConverterForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -49,6 +49,7 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(269, 204);
             this.listBox1.TabIndex = 0;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // listBox2
             // 
@@ -119,6 +120,7 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "Перевести";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.BtnConvert_Click);
             // 
             // textBox2
             // 
@@ -153,7 +155,8 @@
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Конвертер";
+            this.Load += new System.EventHandler(this.ConverterFormLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 
