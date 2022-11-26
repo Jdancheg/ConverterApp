@@ -86,4 +86,9 @@ public class Time : IValue
     {
         return _valueName;
     }
+
+    public Dictionary<string, double> ConvertationCoefficient()
+    {
+        throw new NotImplementedException();
+    }
 }
