@@ -31,8 +31,15 @@ public class ConverterManager
         }
     }
 
+    /// <summary>
+    /// Переменная типы интерфейса IValue
+    /// </summary>
     private IValue _myValue;
 
+    /// <summary>
+    /// Создает объект конкретной физ. величины
+    /// </summary>
+    /// <param name="valueName"></param>
     private void SetIValue(string valueName)
     {
         foreach(var value in _physicValuesList)
@@ -44,9 +51,14 @@ public class ConverterManager
         }
     }
 
+    /// <summary>
+    /// Метод возвращает список доступных физических величин
+    /// </summary>
+    /// <returns></returns>
     public List<string> GetPhysicValuesList()
     {      
         List<string> physicValuesList = new List<string>();
+
         foreach (IValue value in _physicValuesList)
         {
             physicValuesList.Add(value.GetValueName());
@@ -54,12 +66,32 @@ public class ConverterManager
         return physicValuesList;
     }
 
+    /// <summary>
+    /// Метод формирует список доступных единиц измерения из словаря любой величины
+    /// </summary>
+    /// <param name="physicValue"></param>
+    /// <returns></returns>
     public List<string> GetMeasureList(string physicValue)
     {
         SetIValue(physicValue);
-        return _myValue.GetMeasureList();
+
+        List<string> list = new List<string>();
+
+        foreach (var str in _myValue.GetCoefficients())
+        {
+            list.Add(str.Key);
+        }
+        return list;        
     }    
 
+    /// <summary>
+    /// Метод осуществляет конвертацию
+    /// </summary>
+    /// <param name="physicValue"></param>
+    /// <param name="value"></param>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <returns></returns>
     public double GetConvertedValue(
         string physicValue,
         double value,
@@ -67,12 +99,10 @@ public class ConverterManager
         string to)
     {
         SetIValue(physicValue);
-        return _myValue.GetConvertedValue(value, from, to);
-    }
 
-    // ДОМА - на лабораторных!
-    // дописать приложение
-    // реализовать интерфейс WinFroms / WPF
-    // реализовать 5 классов величин
-    
+        value *= _myValue.GetCoefficients()[from];
+        value /= _myValue.GetCoefficients()[to];
+
+        return value;        
+    }   
 }

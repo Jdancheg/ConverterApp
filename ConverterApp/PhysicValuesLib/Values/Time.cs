@@ -2,13 +2,48 @@
 
 public class Time : IValue
 {
-    private double Value { get; set; }
+    private string _valueName = "Время";   
+
+    public string GetValueName()
+    {
+        return _valueName;
+    }    
+
+    private Dictionary<string, double> _coeff = new Dictionary<string, double>()
+    {
+        { "Секунды",        1       },
+        { "Милисекунды",    0.001   },
+        { "Минуты",         60      },
+        { "Часы",           60 * 60 },
+    };
+
+    public Dictionary<string, double> GetCoefficients()
+    {
+        return _coeff;
+    }
+
+    #region Уже не нужные методы
+
+    /// <summary>
+    /// Метод возвращает список единиц измерения
+    /// </summary>
+    /// <returns></returns>
+    /*
+    private double Value { get; set; }   
     private string? From { get; set; }
     private string? To { get; set; }
 
-    private string _valueName = "Время";    
+    public List<string> GetMeasureList()
+    {
+        List<string> list = new List<string>();
+        foreach (var str in _coeff)
+        {
+            list.Add(str.Key);
+        }
+        return list;
+    }
 
-    /// <summary>
+        /// <summary>
     /// Метод возвращает конвертированное значение
     /// </summary>
     /// <returns></returns>
@@ -20,20 +55,6 @@ public class Time : IValue
         ToSi();
         ToRequired();
         return Value;
-    }
-
-    /// <summary>
-    /// Метод возвращает список единиц измерения
-    /// </summary>
-    /// <returns></returns>
-    public List<string> GetMeasureList()
-    {
-        List<string> list = new List<string>();
-        foreach (var str in _coeff)
-        {
-            list.Add(str.Key);
-        }
-        return list;
     }
 
     /// <summary>
@@ -51,17 +72,7 @@ public class Time : IValue
     {
         Value *= _coeff[From];
     }
+    */
 
-    public string GetValueName()
-    {
-        return _valueName;
-    }
-
-    private Dictionary<string, double> _coeff = new Dictionary<string, double>()
-    {
-        { "Секунды",        1       },
-        { "Милисекунды",    0.001   },
-        { "Минуты",         60      },
-        { "Часы",           60 * 60 },
-    };   
+    #endregion
 }
