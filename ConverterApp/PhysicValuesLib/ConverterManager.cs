@@ -23,6 +23,7 @@ public class ConverterManager
         {
             if ((type.IsInterface == false)
                 && (type.IsAbstract == false)
+                && (type.Name != ("AnyValue"))                          // добавил, чтобы исключить базовый класс
                 && (type.GetInterface("IValue") != null))               // не добавляем абстрактные классы и интерфейсы
             {
                 IValue value = (IValue)Activator.CreateInstance(type);
